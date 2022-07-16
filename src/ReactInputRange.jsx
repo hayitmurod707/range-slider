@@ -15,9 +15,9 @@ const defaultOptions = {
 };
 // renderTrack
 // renderThumb
-const ReactInputRange = options => (
+const ReactInputRange = props => (
 	<StyledElement>
-		<Slider {...defaultOptions} {...options} />
+		<Slider {...defaultOptions} {...props} />
 	</StyledElement>
 );
 ReactInputRange.defaultProps = {

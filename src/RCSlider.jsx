@@ -84,27 +84,27 @@ const Handle = ({ props }, { value }) => (
 );
 const defaultOptions = {
 	// className: 'rc-slider', // string
-	// min: 0, // number
-	// max: 100, // number
-	// marks: object,
-	// step: 1, // number
-	range: true, // boolean
-	allowCross: false, // boolean
-	// vertical: false, // boolean
-	defaultValue: [0, 100], // array
+	// disabled: false, // boolean
+	// dots: false // boolean
 	// handle: Component
 	// included: true, // boolean
-	// disabled: false, // boolean
-	// tipTransitionName: '', // string
-	// tipFormatter: function || null,
-	// dots: false // boolean
-	// onChange: required // function
+	// marks: object,
+	// max: 100, // number
+	// min: 0, // number
 	// onAfterChange: required // function
+	// onChange: required // function
+	// step: 1, // number
+	// tipFormatter: function || null,
+	// tipTransitionName: '', // string
+	// vertical: false, // boolean
+	allowCross: false, // boolean
+	defaultValue: [0, 100], // array
 	pushable: true,
+	range: true, // boolean
 };
-const RCSlider = options => (
+const RCSlider = props => (
 	<StyledElement>
-		<Slider {...defaultOptions} {...options} handleRender={Handle} />
+		<Slider {...defaultOptions} {...props} handleRender={Handle} />
 	</StyledElement>
 );
 RCSlider.defaultProps = {

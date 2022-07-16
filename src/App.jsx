@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import RCSlider from './RCSlider';
 import ReactInputRange from './ReactInputRange';
 import ReactRange from './ReactRange';
+import ReactSlider from './ReactSlider';
 const StyledElement = styled.div`
 	align-items: center;
 	display: flex;
@@ -26,6 +27,11 @@ const App = () => {
 			<StyledElement>
 				<div className='content'>
 					<ReactRange onChange={setValue} values={value} />
+				</div>
+			</StyledElement>
+			<StyledElement>
+				<div className='content'>
+					<ReactSlider onChange={setValue} value={value} />
 				</div>
 			</StyledElement>
 			<StyledElement>

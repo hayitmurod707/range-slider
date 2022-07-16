@@ -90,28 +90,28 @@ const renderThumb = ({ props, value }) => (
 	</ThumbElement>
 );
 const defaultOptions = {
-	// renderTrack: required // React.Component
-	// renderThumb: required // React Component
-	// renderMark: - // React Component
-	// values: required // array
-	// onChange: required // function
-	// onFinalChange: required // function
-	// min: 0, // number
-	// max: 100, // number
-	// step: 1, // number
 	// allowOverlap: false, // boolean
-	draggableTrack: true, // boolean
 	// direction: Direction.Right
 	// disabled: false, // boolean
+	// max: 100, // number
+	// min: 0, // number
+	// onChange: required // function
+	// onFinalChange: required // function
+	// renderMark: - // React Component
+	// renderThumb: required // React Component
+	// renderTrack: required // React.Component
 	// rtl: false, // boolean
+	// step: 1, // number
+	// values: required // array
+	draggableTrack: true, // boolean
 };
-const ReactRange = options => (
+const ReactRange = props => (
 	<StyledElement>
 		<Range
 			{...defaultOptions}
-			{...options}
+			{...props}
 			renderThumb={renderThumb}
-			renderTrack={props => renderTrack(props, options)}
+			renderTrack={prop => renderTrack(prop, props)}
 		/>
 	</StyledElement>
 );
