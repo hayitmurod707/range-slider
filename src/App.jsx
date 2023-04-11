@@ -57,6 +57,7 @@ const App = () => {
             </div>
          </StyledElement>
          <StyledElement>
+            <h2>React Input Range</h2>
             <div className='content'>
                <ReactInputRange onChange={setVal} value={val} />
             </div>
