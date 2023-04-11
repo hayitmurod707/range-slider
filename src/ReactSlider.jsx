@@ -1,10 +1,17 @@
 import { array, func } from 'prop-types';
-import Slider from 'react-slider';
+import RangeSlider from 'react-slider';
 import styled from 'styled-components';
-const StyledSlider = styled(Slider)`
-   border-radius: 3px;
-   height: 5px;
+const StyledElement = styled.div`
+   align-items: center;
+   display: flex;
+   height: 24px;
+   justify-content: center;
    width: 100%;
+   & .slider {
+      border-radius: 3px;
+      height: 5px;
+      width: 100%;
+   }
 `;
 const StyledThumb = styled.div`
    background-color: #ffffff;
@@ -64,23 +71,6 @@ const StyledTrack = styled.div`
       background-color: #f6f6f6;
    }
 `;
-const Thumb = (props, { valueNow }) => (
-   <StyledThumb {...props} className={null}>
-      <div className='value'>
-         <div>{valueNow}</div>
-      </div>
-   </StyledThumb>
-);
-const Track = (props, { index, value }) => (
-   <StyledTrack
-      {...props}
-      className={null}
-      data-active={
-         index === 0 || index === value.length ? 'inactive' : 'active'
-      }
-      index={index}
-   />
-);
 const defaultOptions = {
    // areaLabel: array, // one of type string
    // areaLabelledBy: array, // one of type string
@@ -111,14 +101,28 @@ const defaultOptions = {
    // withTracks: false, // true
    defaultValue: [0, 100], // 0
    minDistance: 1, // number 0
+   renderThumb: (props, { valueNow }) => (
+      <StyledThumb {...props} className={null}>
+         <div className='value'>
+            <div>{valueNow}</div>
+         </div>
+      </StyledThumb>
+   ),
+   renderTrack: (props, { index, value }) => (
+      <StyledTrack
+         {...props}
+         className={null}
+         data-active={
+            index === 0 || index === value.length ? 'inactive' : 'active'
+         }
+         index={index}
+      />
+   ),
 };
 const ReactSlider = props => (
-   <StyledSlider
-      {...defaultOptions}
-      {...props}
-      renderThumb={Thumb}
-      renderTrack={Track}
-   />
+   <StyledElement>
+      <RangeSlider {...defaultOptions} {...props} />
+   </StyledElement>
 );
 ReactSlider.defaultProps = {
    value: [0, 100],

@@ -6,7 +6,6 @@ import ReactRange from './ReactRange';
 import ReactSlider from './ReactSlider';
 const StyledElement = styled.div`
    align-items: center;
-   align-items: center;
    display: flex;
    flex-direction: column;
    height: 300px;
@@ -29,7 +28,7 @@ const StyledElement = styled.div`
    }
 `;
 const App = () => {
-   const [value, setValue] = useState([20, 30, 50, 80]);
+   const [value, setValue] = useState([20, 50, 80]);
    const [val, setVal] = useState({ min: 30, max: 80 });
    return (
       <Fragment>

@@ -1,5 +1,5 @@
 import { array, func } from 'prop-types';
-import Slider from 'rc-slider';
+import RangeSlider from 'rc-slider';
 import styled from 'styled-components';
 const StyledElement = styled.div`
    align-items: center;
@@ -17,32 +17,25 @@ const StyledElement = styled.div`
          height: 5px;
       }
       & .rc-slider-track {
-         cursor: pointer;
          background: #5254f1;
+         cursor: pointer;
          height: 5px;
       }
       & .rc-slider-step {
          height: 5px;
       }
-      & .rc-slider-handle {
-         background-color: #ffffff;
-         border-radius: 50%;
-         border: none !important;
-         box-shadow: #cacaca 0px 2px 8px !important;
-         height: 24px;
-         margin-top: -9px;
-         opacity: 1;
-         width: 24px;
-      }
    }
 `;
-const ThumbElement = styled.div`
+const StyledHandle = styled.div`
    background-color: #ffffff;
    border-radius: 50%;
-   box-shadow: #cacaca 0px 2px 8px;
+   border: none !important;
+   box-shadow: #cacaca 0px 2px 8px !important;
    height: 24px;
-   outline: none;
+   margin-top: -9px;
+   opacity: 1;
    width: 24px;
+   outline: none;
    & .value {
       align-items: center;
       bottom: 34px;
@@ -77,15 +70,6 @@ const ThumbElement = styled.div`
       }
    }
 `;
-const Handle = ({ props }, { value, dragging }) => (
-   <ThumbElement {...props}>
-      {dragging && (
-         <div className='value'>
-            <div>{value}</div>
-         </div>
-      )}
-   </ThumbElement>
-);
 const defaultOptions = {
    // activeDotStyle: {}, // object or function
    // className: 'rc-slider', // string
@@ -119,10 +103,19 @@ const defaultOptions = {
    allowCross: false, // boolean
    pushable: true,
    range: true, // boolean
+   handleRender: ({ props }, { value, dragging }) => (
+      <StyledHandle {...props}>
+         {dragging && (
+            <div className='value'>
+               <div>{value}</div>
+            </div>
+         )}
+      </StyledHandle>
+   ),
 };
 const RCSlider = props => (
    <StyledElement>
-      <Slider {...defaultOptions} {...props} handleRender={Handle} />
+      <RangeSlider {...defaultOptions} {...props} />
    </StyledElement>
 );
 RCSlider.defaultProps = {

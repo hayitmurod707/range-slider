@@ -1,25 +1,19 @@
-import { array, func, number } from 'prop-types';
-import { Range, getTrackBackground } from 'react-range';
+import { array, func } from 'prop-types';
+import { Range as RangeSlider, getTrackBackground } from 'react-range';
 import styled from 'styled-components';
-const StyledElement = styled.div`
+const StyledTrack = styled.div`
    align-items: center;
    display: flex;
    height: 24px;
    justify-content: center;
    width: 100%;
-`;
-const TrackElement = styled.div`
-   border-radius: 3px;
-   height: 5px;
-   width: 100%;
-   & .track {
-      background-color: #5254f1;
+   & .react-range-track {
+      border-radius: 3px;
       height: 5px;
-      position: absolute;
-      top: 0;
+      width: 100%;
    }
 `;
-const ThumbElement = styled.div`
+const StyledThumb = styled.div`
    background-color: #ffffff;
    border-radius: 50%;
    box-shadow: #cacaca 0px 2px 8px;
@@ -59,41 +53,6 @@ const ThumbElement = styled.div`
       }
    }
 `;
-const renderTrack = ({ props, children }, options) => {
-   const values = options.values.length;
-   const colors =
-      values === 1
-         ? ['#5254f1', '#f6f6f6']
-         : [
-              '#f6f6f6',
-              ...[...Array(values - 1)].map(() => '#5254f1'),
-              '#f6f6f6',
-           ];
-   const background = getTrackBackground({
-      ...options,
-      colors,
-   });
-   return (
-      <TrackElement
-         {...props}
-         style={{
-            ...props.style,
-            background,
-         }}
-      >
-         {children}
-      </TrackElement>
-   );
-};
-const renderThumb = ({ props, value, isDragged }) => (
-   <ThumbElement {...props}>
-      {isDragged && (
-         <div className='value'>
-            <div>{value}</div>
-         </div>
-      )}
-   </ThumbElement>
-);
 const defaultOptions = {
    // allowOverlap: false, // boolean
    // direction: Direction.Right //  one of ['to right', 'to left', 'to bottom', 'to top'] string
@@ -109,27 +68,49 @@ const defaultOptions = {
    // rtl: false, // boolean
    // step: 1, // number
    // values: required [0, 100] // array
-   max: 100,
-   min: 0,
+   renderThumb: ({ props, value, isDragged }) => (
+      <StyledThumb {...props}>
+         {isDragged && (
+            <div className='value'>
+               <div>{value}</div>
+            </div>
+         )}
+      </StyledThumb>
+   ),
+   renderTrack: ({ props, children }) => {
+      const values = children.map(child => child?.props['aria-valuenow']);
+      const colors =
+         values.length === 1
+            ? ['#5254f1', '#f6f6f6']
+            : [
+                 '#f6f6f6',
+                 ...[...Array(values.length - 1)].fill('#5254f1'),
+                 '#f6f6f6',
+              ];
+      const background = getTrackBackground({
+         colors,
+         max: 100,
+         min: 0,
+         values,
+      });
+      return (
+         <StyledTrack>
+            <div
+               {...props}
+               className='react-range-track'
+               style={{ background }}
+            >
+               {children}
+            </div>
+         </StyledTrack>
+      );
+   },
 };
-const ReactRange = props => (
-   <StyledElement>
-      <Range
-         {...defaultOptions}
-         {...props}
-         renderThumb={renderThumb}
-         renderTrack={prop => renderTrack(prop, props)}
-      />
-   </StyledElement>
-);
+const ReactRange = props => <RangeSlider {...defaultOptions} {...props} />;
 ReactRange.defaultProps = {
-   max: 100,
-   min: 0,
    values: [0, 100],
 };
 ReactRange.propTypes = {
-   max: number,
-   min: number,
    onChange: func.isRequired,
    values: array.isRequired,
 };
