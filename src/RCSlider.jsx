@@ -11,13 +11,13 @@ const StyledElement = styled.div`
       height: 5px;
       padding: 0;
       & .rc-slider-rail {
-         background: #f6f6f6;
+         background-color: #f6f6f6;
          border-radius: 3px;
          cursor: pointer;
          height: 5px;
       }
       & .rc-slider-track {
-         background: #5254f1;
+         background-color: #5254f1;
          cursor: pointer;
          height: 5px;
       }

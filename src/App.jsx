@@ -30,6 +30,7 @@ const StyledElement = styled.div`
 const App = () => {
    const [value, setValue] = useState([20, 50, 80]);
    const [val, setVal] = useState({ min: 30, max: 80 });
+   console.log(val);
    return (
       <Fragment>
          <StyledElement>
