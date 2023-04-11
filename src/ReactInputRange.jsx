@@ -13,10 +13,8 @@ const defaultOptions = {
    // onChangeStart
    // onChangeComplete
 };
-
 // renderTrack
 // renderThumb
-
 const ReactInputRange = props => (
    <StyledElement>
       <Slider {...defaultOptions} {...props} />
