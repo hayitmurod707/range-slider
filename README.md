@@ -1,4 +1,4 @@
-# range-slider
+# Range Sliders
 
 Range Slider (with rc-slider)
 

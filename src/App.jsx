@@ -8,7 +8,7 @@ const StyledElement = styled.div`
    align-items: center;
    display: flex;
    flex-direction: column;
-   height: 300px;
+   height: 200px;
    justify-content: center;
    width: 100%;
    & h1 {
@@ -30,11 +30,10 @@ const StyledElement = styled.div`
 const App = () => {
    const [value, setValue] = useState([20, 50, 80]);
    const [val, setVal] = useState({ min: 30, max: 80 });
-   console.log(val);
    return (
       <Fragment>
          <StyledElement>
-            <h1>Range sliders with react libraries</h1>
+            <h1>Range sliders</h1>
             <h4>
                <a href='https://github.com/hayitmurod707/range-slider'>
                   Github
